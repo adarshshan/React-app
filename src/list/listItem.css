@@ -1,0 +1,13 @@
+.list-title{
+    font-size: 30px;
+    font-weight: 500;
+    color: rgb(204, 49, 49);
+}
+.list-title:hover{
+    color: red;
+    background-color: greenyellow;
+}
+.list-item{
+    box-shadow: black 5px;
+    padding: 10px;
+}
