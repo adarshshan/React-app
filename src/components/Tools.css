@@ -1,0 +1,9 @@
+.list-tools{
+    padding: 20px;
+    margin-bottom: 50px;
+    background: rgb(242, 251, 218);
+    border: 2px solid darkblue;
+}
+.list-footer{
+    font-size: 14px;
+}
