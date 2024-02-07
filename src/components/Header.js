@@ -3,13 +3,15 @@ import './Header.css';
 
 class Header extends React.Component {
     render() {
+        let props=this.props;
+        const {onMenuSelect}=props;
         return (
             <div className="app-header">
                 <span className="header-title">Code malayalam</span>
-                <span>Home</span>
-                <span>Usage</span>
-                <span>settings</span>
-                <span>logout</span>
+                <span onClick={()=>onMenuSelect('home')}>Home</span>
+                <span onClick={()=>onMenuSelect('usage')}>Usage</span>
+                <span onClick={()=>onMenuSelect('settings')}>settings</span>
+                <span onClick={()=>onMenuSelect('logout')}>logout</span>
             </div>
         )
     }

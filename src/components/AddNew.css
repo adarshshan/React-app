@@ -1,0 +1,11 @@
+.add-new{
+    padding: 10px 10px;
+    border-radius: 5px;
+    color: red;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+}
+.add-new input{
+    margin-right: 10px;
+}
