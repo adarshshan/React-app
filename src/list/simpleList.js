@@ -2,7 +2,7 @@ import React from "react";
 import ListItem from "./listItem";
 
 function SimpleList(props) {
-    const { data, onAction,onLabelClick } = props;
+    const { data, onAction,onLabelClick,handleShowTable } = props;
     return (
         <div className="app-list">
             {

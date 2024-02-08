@@ -4,6 +4,7 @@ import Footer from "./components/Footer"
 import HomePage from "./pages/HomePage";
 import React from "react";
 import DummyPage from "./pages/DummyPage";
+import Usage from "./pages/Usage";
 
 class App extends React.Component {
   constructor(props) {
@@ -24,11 +25,11 @@ class App extends React.Component {
       case 'home':
         return <HomePage />
       case 'usage':
-        return <DummyPage name="usage" />
+        return <Usage />
       case 'settings':
-        return <DummyPage name="settings" />
+        return <DummyPage key='settings' name="settings" />
       case 'logout':
-        return <DummyPage name="logout" />
+        return <DummyPage key='logout' name="logout" />
       default:
         break;
     }

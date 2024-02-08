@@ -3,6 +3,8 @@ import React from "react";
 import Tools from "../components/Tools";
 import SimpleList from "../list/simpleList";
 
+const MyContext = React.createContext();
+const MyNewContext = React.createContext();
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -11,7 +13,8 @@ class HomePage extends React.Component {
         this.state = {
             data: [],
             activeState: 'all',
-            message: ''
+            message: '',
+            showLabel: true,
         }
     }
     componentDidMount() {
@@ -24,7 +27,17 @@ class HomePage extends React.Component {
             })
         })
     }
-    componentWillUnmount(){
+    handleRefresh() {
+        console.log('Refresh')
+        fetch('/data2.json').then((data) => {
+            return data.json();
+        }).then((data) => {
+            this.setState({
+                data: data
+            })
+        })
+    }
+    componentWillUnmount() {
         console.log('componentWillUnmount')
     }
     componentDidUpdate(previousProps, previousState) {
@@ -53,6 +66,11 @@ class HomePage extends React.Component {
             activeState: arg
         })
     }
+    handleShowTable = (evt) => {
+        this.setState({
+            showLabel: evt.target.checked
+        })
+    }
     render() {
         const { data, activeState } = this.state;
         const newList = data.filter((item) => {
@@ -64,12 +82,26 @@ class HomePage extends React.Component {
         console.log(newList);
         // arr = newList;
         return (
-            <Tools onAction={this.onListChange} selectValue={activeState}>
-                {/* <Tools onAction={this.onListChange.bind(this)}> */}
-                <SimpleList onLabelClick={this.handleLabelClick} data={newList} onAction={this.handleDelete} />
-            </Tools>
+            <div>
+                <div>
+                    <input checked={this.state.showLabel} onChange={this.handleShowTable} type="checkbox" />Show Label
+                </div>
+                <MyNewContext.Provider value={500}>
+                    <MyContext.Provider value={this.state.showLabel}>
+                        <Tools onAction={this.onListChange} selectValue={activeState}>
+                            {/* <Tools onAction={this.onListChange.bind(this)}> */}
+                            <SimpleList onLabelClick={this.handleLabelClick} data={newList} onAction={this.handleDelete} />
+                        </Tools>
+                    </MyContext.Provider>
+                </MyNewContext.Provider>
+            </div>
         )
     }
 }
 
 export default HomePage;
+
+export {
+    MyContext,
+    MyNewContext
+}

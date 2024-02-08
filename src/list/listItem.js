@@ -1,4 +1,4 @@
-import Label from "./label";
+import Label2 from "./label2";
 import './listItem.css';
 function ListItem(props) {
     const { title, descr, isActive, onDelete,onLabelClick} = props;
@@ -13,7 +13,7 @@ function ListItem(props) {
                 {descr}
             </div>
             <div className="list-label">
-                <Label onAction={onLabelClick} isActive={isActive} />
+                <Label2 onAction={onLabelClick} isActive={isActive} />
             </div>
             <hr />
         </div>
