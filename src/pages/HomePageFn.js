@@ -1,23 +1,20 @@
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Tools from "../components/Tools";
 import SimpleList from "../list/simpleList";
-import { MyContext,MyNewContext } from "./MyContext";
+import { MyContext, MyNewContext } from "./MyContext";
 import JustInto from "./JustInto";
 
-class HomePage extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            data: [],
-            activeState: 'all',
-            message: '',
-            showLabel: true,
-        }
-    }
-    componentDidMount() {
-        // console.log('componentDidMount')
+function HomePage() {
+    const [data, setData] = useState([]);
+    const [activeState, setAciveState] = useState('all');
+    const [message, setMessage] = useState('');
+    const [showLabel, setShowLabel] = useState(true);
+
+
+    useEffect(() => {
+        // console.log('useEffect_componentDidMount')
         fetch('/data.json').then((data) => {
             return data.json();
         }).then((data) => {
@@ -25,28 +22,17 @@ class HomePage extends React.Component {
                 data: data
             })
         })
-    }
-    handleRefresh() {
-        console.log('Refresh')
-        fetch('/data2.json').then((data) => {
-            return data.json();
-        }).then((data) => {
-            this.setState({
-                data: data
-            })
-        })
-    }
-    componentWillUnmount() {
-        // console.log('componentWillUnmount')
-    }
-    componentDidUpdate(previousProps, previousState) {
-        // console.log('componentDidUpdate')
-        if (previousState.message !== this.state.message) {
-            this.setState({
-                message: 'Message'
-            })
-        }
-    }
+    },[])
+}
+class HomePage extends React.Component {
+    // componentDidUpdate(previousProps, previousState) {
+    //     console.log('componentDidUpdate')
+    //     if (previousState.message !== this.state.message) {
+    //         this.setState({
+    //             message: 'Message'
+    //         })
+    //     }
+    // }
     onListChange = (evt) => {
         const value = evt.target.value;
         this.setState({
@@ -91,7 +77,7 @@ class HomePage extends React.Component {
                             {/* <Tools onAction={this.onListChange.bind(this)}> */}
                             <SimpleList onLabelClick={this.handleLabelClick} data={newList} onAction={this.handleDelete} />
                         </Tools>
-                        <JustInto/>
+                        <JustInto activeState={activeState} />
                     </MyContext.Provider>
                 </MyNewContext.Provider>
             </div>
